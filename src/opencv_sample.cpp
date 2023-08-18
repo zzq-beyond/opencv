@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-// =======================================draw line, circle, or something=========================================
+// ====================================== draw line, circle, or something =======================================
 // #define w 400
 // using namespace cv;
 // void MyEllipse( Mat img, double angle );
@@ -112,7 +112,7 @@ using namespace std;
 
 
 
-//=============================================erode and dilate==================================================
+//============================================= erode and dilate ===============================================
 // int main(){
 //     Mat src = imread("flower.jpg", IMREAD_COLOR);
 //     Mat dst_1 = src.clone();
@@ -130,7 +130,7 @@ using namespace std;
 
 
 
-// ==================================================gaussianblur=============================================
+// =============================================== gaussianblur ===========================================
 // int main(){
 //     Mat src = imread("view.jpg", IMREAD_COLOR);
 //     Mat dst = src.clone();
@@ -141,7 +141,7 @@ using namespace std;
 
 
 
-//===============================================read and write yaml or xml=======================================
+//============================================= read and write yaml or xml =======================================
 // static void help(char** av)
 // {
 //     cout << endl
@@ -271,7 +271,7 @@ using namespace std;
 
 
 
-//===============================================mix two photos================================================
+//============================================ mix two photos =============================================
 // //we'reNOT "using namespace std;" here, to avoid collisions between the beta variable and std::beta in c++17
 // using std::cin;
 // using std::cout;
@@ -299,7 +299,7 @@ using namespace std;
 
 
 
-//=============erode, dilate, open, close, ... morphologyEx(src, dst, select 0~6 here, element)===================
+//============= erode, dilate, open, close, ... morphologyEx(src, dst, select 0~6 here, element) ================
 // int main(){
 //     Mat src = imread("open.png", IMREAD_COLOR);
 //     Mat dst = src.clone();
@@ -314,7 +314,7 @@ using namespace std;
 
 
 
-//==================================find horizontal and vertical lines=============================================
+//================================== find horizontal and vertical lines =====================================
 // int main(){
 //     Mat gray, bw;
 //     Mat src = imread("music.jpg", IMREAD_COLOR);
@@ -348,7 +348,7 @@ using namespace std;
 
 
 
-//========================================image pyramids=======================================================
+//======================================== image pyramids =======================================================
 // int main(){
 //     Mat src = imread("cat100.jpg");
 //     cout << src.cols << "---" << src.rows <<endl;
@@ -362,7 +362,7 @@ using namespace std;
 
 
 
-//====================================================threshold=================================================
+//================================================== threshold ===============================================
 // int main(){
 //     /* 0: Binary
 //      1: Binary Inverted
@@ -383,12 +383,11 @@ using namespace std;
 
 
 
-//=================================Thresholding Operations using inRange========================================
-// int main(){
-    
-// }
+//================================= Thresholding Operations using inRang e================================
 
-//===================================Canny Edge Detector====================================
+// 待定...
+
+//============================================== Canny Edge Detector ======================================
 // Mat src, src_gray;
 // Mat dst, detected_edges;
 
@@ -420,7 +419,7 @@ using namespace std;
 //     return 0;
 // }
 
-//===================================Hough Line Transform=============================
+//=================================== Hough Line Transform =============================
 
 // int main(){
 //     Mat dst, cdst, cdstp;
@@ -462,7 +461,7 @@ using namespace std;
 
 // }
 
-//===================================Hough Cricle Transform==============================
+//=================================== Hough Cricle Transform ==============================
 
 // int main(int argc, char** argv){
 
@@ -641,41 +640,330 @@ using namespace std;
 
 //=============================== Bounding boxes and circles ===================================
 
-Mat gray;
-int thresh = 100;
-RNG rng(12345);
+// Mat gray;
+// int thresh = 100;
+// RNG rng(12345);
 
-void thresh_callback(int, void*);
-int main(int argc, char** argv){
+// void thresh_callback(int, void*);
+// int main(int argc, char** argv){
     
-    Mat src = imread("");
-    cvtColor(src, gray, COLOR_BGR2GRAY);
-    blur(gray, gray, Size(3,3));
+//     Mat src = imread("sudoku.png");
+//     cvtColor(src, gray, COLOR_BGR2GRAY);
+//     blur(gray, gray, Size(3,3));
 
-    const char* source_window = "Source";
+//     const char* source_window = "Source";
+//     namedWindow(source_window);
+//     imshow(source_window, src);
+//     const int max_thresh = 255;
+//     createTrackbar("Canny thresh", source_window, &thresh, max_thresh, thresh_callback);
+//     thresh_callback(0, 0);
+//     waitKey();
+// }
+
+// void thresh_callback(int, void*){
+
+//     Mat canny_output;
+//     Canny(gray, canny_output, thresh, thresh*2);
+//     vector<vector<Point>> contours;
+//     findContours(canny_output, contours, RETR_TREE, CHAIN_APPROX_SIMPLE);
+
+//     vector<vector<Point>> contours_ploy(contours.size());
+//     vector<Rect> boundRect(contours.size());
+//     vector<Point2f> centers(contours.size());
+//     vector<float> radius(contours.size());
+
+//     for(size_t i = 0; i < contours.size(); i++){
+//         approxPolyDP(contours[i], contours_ploy[i], 3, true);
+//         boundRect[i] = boundingRect(contours_ploy[i]);
+//         minEnclosingCircle(contours_ploy[i], centers[i], radius[i]);
+//     }
+
+//     Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+//     for(size_t i=0; i < contours.size(); i++){
+//         Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0,256), rng.uniform(0,256));
+//         drawContours(drawing, contours, (int)i, color, 2);
+//         rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), color, 2);
+//         circle(drawing, centers[i], (int)radius[i], color, 2);
+//     }
+//     imshow(" Contours", drawing);
+
+// }
+
+//================================ Bounding rotate boxes and ellipses for contours ======================
+
+/*暂时感觉用处不大*/
+
+//========================================= Image Moments ================================ //未理解，需再看
+
+// Mat src_gray;
+// int thresh = 100;
+// RNG rng(12345);
+
+// void thresh_callback(int, void*);
+
+// int main(int argc, char** argv){
+//     Mat src = imread("");
+//     cvtColor(src, src_gray, COLOR_BGR2GRAY);
+//     blur(src_gray, src_gray, Size(3,3));
+
+//     const char* source_window = "Source_window";
+//     namedWindow(source_window);
+//     imshow(source_window, src_gray);
+
+//     const int max_thresh = 255;
+//     createTrackbar("thresh", source_window, &thresh, max_thresh, thresh_callback);
+//     thresh_callback(0, 0);
+//     waitKey();
+// }
+
+// void thresh_callback(int, void*){
+//     Mat canny_output;
+//     Canny(src_gray, canny_output, thresh, thresh*2, 3);
+//     vector<vector<Points>> contours;
+//     findContours(canny_output, contours, RETR_TREE, CHAIN_APPROX_SIMPLE);
+
+//     vector<Moments> mu(contours.size());
+//     for(size_t i=0; i < contours.size(); i++){
+//         mu[i] = moments(contours[i]);
+//     }
+//     vector<Point2f> mc(contours.size());
+//     for(size_t i=0; i < contours.size(); i++){
+//         mc[i] = Point2f( static_cast<float>(mu[i].m10 / (mu[i].m00 + 1e-5)),
+//         static_cast<float>(mu[i].m01 / (mu[i].m00 + 1e-5)) );
+//         cout << "mc[" << i << "]=" << mc[i] << endl;
+//     }
+    
+//     Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+//     for( size_t i = 0; i< contours.size(); i++ ){
+//         Scalar color = Scalar( rng.uniform(0, 256), rng.uniform(0,256), rng.uniform(0,256) );
+//         drawContours( drawing, contours, (int)i, color, 2 );
+//         circle( drawing, mc[i], 4, color, -1 );
+//  }
+//     imshow( "Contours", drawing );
+//     cout << "\t Info: Area and Contour Length \n";
+//     for( size_t i = 0; i < contours.size(); i++ ){
+//         cout << " * Contour[" << i << "] - Area (M_00) = " << std::fixed << std::setprecision(2) << mu[i].m00
+//         << " - Area OpenCV: " << contourArea(contours[i]) << " - Length: " << arcLength( contours[i], true ) << endl;
+//     }
+// }
+
+//======================================= Out of focus deblur filter ========================================
+/*目前效果不好，没有实现相应功能*/
+// void help();
+// void calcPSF(Mat& outputImg, Size filterSize, int R);
+// void fftshift(const Mat& inputImg, Mat& outputImg);
+// void filter2DFreq(const Mat& inputImg, Mat& outputImg, const Mat& H);
+// void calcWnrFilter(const Mat& input_h_PSF, Mat& output_G, double nsr);
+// const String keys =
+// "{help h usage ? | | print this message }"
+// "{image |original.JPG | input image name }"
+// "{R |53 | radius }"
+// "{SNR |5200 | signal to noise ratio}"
+// ;
+// int main(int argc, char *argv[])
+// {
+//  help();
+//  CommandLineParser parser(argc, argv, keys);
+//  if (parser.has("help"))
+//  {
+//  parser.printMessage();
+//  return 0;
+//  }
+//  int R = 10;
+//  int snr = 40;
+
+//  if (!parser.check())
+//  {
+//  parser.printErrors();
+//  return 0;
+//  }
+//  Mat imgIn;
+//  imgIn = imread("original.jpg", IMREAD_GRAYSCALE);
+//  if (imgIn.empty()) //check whether the image is loaded or not
+//  {
+//  cout << "ERROR : Image cannot be loaded..!!" << endl;
+//  return -1;
+//  }
+//  Mat imgOut;
+//  // it needs to process even image only
+//  Rect roi = Rect(0, 0, imgIn.cols & -2, imgIn.rows & -2);
+//  //Hw calculation (start)
+//  Mat Hw, h;
+//  calcPSF(h, roi.size(), R);
+//  calcWnrFilter(h, Hw, 1.0 / double(snr));
+//  //Hw calculation (stop)
+//  // filtering (start)
+//  filter2DFreq(imgIn(roi), imgOut, Hw);
+//  // filtering (stop)
+//  imgOut.convertTo(imgOut, CV_8U);
+//  normalize(imgOut, imgOut, 0, 255, NORM_MINMAX);
+//  imwrite("result.jpg", imgOut);
+//  return 0;
+// }
+// void help()
+// {
+//  cout << "2018-07-12" << endl;
+//  cout << "DeBlur_v8" << endl;
+//  cout << "You will learn how to recover an out-of-focus image by Wiener filter" << endl;
+// }
+// void calcPSF(Mat& outputImg, Size filterSize, int R)
+// {
+//  Mat h(filterSize, CV_32F, Scalar(0));
+//  Point point(filterSize.width / 2, filterSize.height / 2);
+//  circle(h, point, R, 255, -1, 8);
+//  Scalar summa = sum(h);
+//  outputImg = h / summa[0];
+// }
+// void fftshift(const Mat& inputImg, Mat& outputImg)
+// {
+//  outputImg = inputImg.clone();
+//  int cx = outputImg.cols / 2;
+//  int cy = outputImg.rows / 2;
+//  Mat q0(outputImg, Rect(0, 0, cx, cy));
+//  Mat q1(outputImg, Rect(cx, 0, cx, cy));
+//  Mat q2(outputImg, Rect(0, cy, cx, cy));
+//  Mat q3(outputImg, Rect(cx, cy, cx, cy));
+//  Mat tmp;
+//  q0.copyTo(tmp);
+//  q3.copyTo(q0);
+//  tmp.copyTo(q3);
+//  q1.copyTo(tmp);
+//  q2.copyTo(q1);
+//  tmp.copyTo(q2);
+// }
+// void filter2DFreq(const Mat& inputImg, Mat& outputImg, const Mat& H)
+// {
+//  Mat planes[2] = { Mat_<float>(inputImg.clone()), Mat::zeros(inputImg.size(), CV_32F) };
+//  Mat complexI;
+//  merge(planes, 2, complexI);
+//  dft(complexI, complexI, DFT_SCALE);
+//  Mat planesH[2] = { Mat_<float>(H.clone()), Mat::zeros(H.size(), CV_32F) };
+//  Mat complexH;
+//  merge(planesH, 2, complexH);
+//  Mat complexIH;
+//  mulSpectrums(complexI, complexH, complexIH, 0);
+//  idft(complexIH, complexIH);
+//  split(complexIH, planes);
+//  outputImg = planes[0];
+// }
+// void calcWnrFilter(const Mat& input_h_PSF, Mat& output_G, double nsr)
+// {
+//  Mat h_PSF_shifted;
+//  fftshift(input_h_PSF, h_PSF_shifted);
+//  Mat planes[2] = { Mat_<float>(h_PSF_shifted.clone()), Mat::zeros(h_PSF_shifted.size(), CV_32F) };
+//  Mat complexI;
+//  merge(planes, 2, complexI);
+//  dft(complexI, complexI);
+//  split(complexI, planes);
+//  Mat denom;
+//  pow(abs(planes[0]), 2, denom);
+//  denom += nsr;
+//  divide(planes[0], denom, output_G);
+// }
+
+//=================================== Motion Deblur Filter =======================================
+
+//================= Anisotropic images segmentation by a gridient structure tensor ===============
+
+//============================ Periodic Noise Removing Filter ====================================
+
+//=================================== Harris corner detector =====================================
+// Mat src, src_gray;
+// int thresh = 200;
+// int max_thresh = 255;
+
+// const char* source_window = "Source image";
+// const char* corners_window = "Corners detect";
+
+// void cornerHarris_demo(int, void*);
+// int main(int argc, char** argv){
+//     src = imread("square.jpg");
+//     cvtColor(src, src_gray, COLOR_BGR2GRAY);
+//     namedWindow(source_window);
+//     createTrackbar("Threshold", source_window, &thresh, max_thresh, cornerHarris_demo);
+//     imshow(source_window, src);
+//     cornerHarris_demo(0, 0);
+//     waitKey();
+//     return 0;
+// }
+
+// void cornerHarris_demo(int, void*){
+//     int blockSize = 2;
+//     int kSize = 3;
+//     double k = 0.05;
+
+//     Mat dst = Mat::zeros(src.size(), CV_32FC1);
+//     cornerHarris(src_gray, dst, blockSize, kSize, k);
+
+//     Mat dst_norm, dst_norm_scaled;
+//     normalize(dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+//     convertScaleAbs(dst_norm, dst_norm_scaled);
+//     for(int i=0; i < dst_norm.rows; i++){
+//         for(int j=0; j < dst_norm.cols; j++){
+//             if((int)dst_norm.at<float>(i,j) > thresh)
+//                 circle(dst_norm_scaled, Point(j,i), 5, Scalar(0), 2, 8, 0);
+//         }
+//     }
+//     namedWindow(corners_window);
+//     imshow(corners_window, dst_norm_scaled);
+// }
+
+//================================= Shi Tomasi coner detector ============================
+
+//================================= Creating your own corner detector ====================
+
+//================================= Detecting corners location in subpixels ==============
+Mat src, src_gray;
+
+int maxCorners = 10;
+int maxTrackbar = 25;
+
+RNG rng(12345);
+const char* source_window = "Image";
+
+void subpixels_detector(int, void*);
+
+int main(int argc, char** argv){
+
+    src = imread("square.jpg");
+    cvtColor(src, src_gray, COLOR_BGR2GRAY);
     namedWindow(source_window);
+    createTrackbar("Max corners:", source_window, &maxCorners, maxTrackbar, subpixels_detector);
     imshow(source_window, src);
-    const int max_thresh = 255;
-    createTrackbar("Canny thresh", source_window, &thresh, max_thresh, thresh_callback);
-    thresh_callback(0, 0);
+    subpixels_detector(0, 0);
     waitKey();
+    return 0;
 }
 
-void thresh_callback(int, void*){
+void subpixels_detector(int, void*){
+    maxCorners = MAX(maxCorners, 1);
+    vector<Point2f> corners;
+    double qualityLevel = 0.01;
+    double minDistance = 10;
+    int blockSize = 3;
+    int gradientSize = 3;
+    bool useHarrisDetector = false;
+    double k = 0.04;
 
-    Mat canny_output;
-    Canny(gray, canny_output, thresh, thresh*2);
-    vector<vector<Point>> contours;
-    findContours(canny_output, contours, RETR_TREE, CHAIN_APPROX_SIMPLE);
+    Mat copy = src.clone();
+    goodFeaturesToTrack(src_gray, corners, maxCorners, qualityLevel, minDistance, Mat(),
+    blockSize, useHarrisDetector, k);
 
-    vector<vector<Point>> contours_ploy(contours.size());
-    vector<Rect> boundRect(contours.size());
-    vector<Point2f> centers(contours.size());
-    vector<float> radius = (contours.size());
+    cout << "Number of corners detected: " << corners.size() << endl;
+    int radius = 4;
+    for(size_t i=0; i < corners.size(); i++)
+        circle(copy, corners[i], radius, Scalar(rng.uniform(0,256), rng.uniform(0, 256), rng.uniform(0, 256)), FILLED );
 
-    for(size_t i = 0; i < contours.size(); i++){
-        approxPolyDP(contours[i], contours_ploy[i], 3, true);
-        
-    }
+    namedWindow(source_window);
+    imshow(source_window, copy);
 
+    Size winSize  = Size(5, 5);
+    Size zeroZone = Size(-1, -1);
+    TermCriteria criteria = TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 40, 0.01);
+
+    cornerSubPix(src_gray, corners, winSize, zeroZone, criteria);
+    for(size_t i=0; i < corners.size(); i++)
+        cout << " -- Refined Corner [" << i << "] (" << corners[i].x << "," << corners[i].y << ")" << endl;
 }
+
+
